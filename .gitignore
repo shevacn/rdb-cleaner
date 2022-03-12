@@ -1,0 +1,6 @@
+cmd/logs.log
+configs/config.json
+configs/done.json
+.idea
+logs.log
+cmd/rdb-cleaner
