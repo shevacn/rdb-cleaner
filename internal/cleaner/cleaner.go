@@ -113,7 +113,7 @@ func startWorker(taskChan chan *SubDelTask, workerId int) {
 			continue
 		}
 		delTask.conn.RateLimit.Take()
-		//log.Logger.Info(fmt.Sprintf("[task-%d][worker-%d]del key=%s", delTask.taskIndex, workerId, delTask.key))
+		log.Logger.Info(fmt.Sprintf("[task-%d][worker-%d]del key=%s", delTask.taskIndex, workerId, delTask.key))
 		delTask.conn.Conn.Del(ctx, delTask.key...)
 
 		atomic.AddInt32(&delTask.task.delKeyCnt, int32(len(delTask.key)))
@@ -254,7 +254,7 @@ func LoadConfig(args []string) (*Config, error) {
 		help       bool
 		configFile string
 	)
-	fs := flag.NewFlagSet("hmq-broker", flag.ExitOnError)
+	fs := flag.NewFlagSet("rdb-cleaner", flag.ExitOnError)
 	fs.Usage = showHelp
 
 	fs.BoolVar(&help, "h", false, "Show this message.")
