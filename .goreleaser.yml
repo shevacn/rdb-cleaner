@@ -1,0 +1,53 @@
+project_name: rdb-cleaner
+env:
+  - GO111MODULE=on
+builds:
+- env:
+    - CGO_ENABLED=1
+  binary: geektime-dl
+  goos:
+    - windows
+    - darwin
+    - linux
+  goarch:
+    - 386
+    - amd64
+    - arm
+    - arm64
+  ignore:
+    - goos: linux
+      goarch: arm
+      goarm: 6
+    - goos: darwin
+      goarch: 386
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs'
+      - '^tests'
+      - Merge pull request
+      - Merge branch
+archives:
+-
+  name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}_v{{ .Arm }}{{ end }}'
+  format: tar.gz
+  format_overrides:
+    - goos: windows
+      format: zip
+  files:
+    - none*
+  wrap_in_directory: false
+  replacements:
+    amd64: 64-bit
+    386: 32-bit
+    arm: ARM
+    arm64: ARM64
+    darwin: macOS
+    linux: Linux
+    windows: Windows
+    openbsd: OpenBSD
+    netbsd: NetBSD
+    freebsd: FreeBSD
+release:
+  draft: true
