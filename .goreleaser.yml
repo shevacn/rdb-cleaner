@@ -4,7 +4,7 @@ env:
 builds:
 - env:
     - CGO_ENABLED=1
-  binary: geektime-dl
+  binary: rdb-cleaner
   goos:
     - windows
     - darwin

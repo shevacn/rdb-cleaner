@@ -5,3 +5,4 @@ configs/done.json
 logs.log
 cmd/rdb-cleaner
 .DS_Store
+dist
