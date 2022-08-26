@@ -170,7 +170,7 @@ func startWorker(taskChan chan *SubDelTask, workerId int) {
 //}
 
 func doTask(taskIndex int, task Task, taskChan chan *SubDelTask) {
-	fmt.Printf("Start task, taskIndex=%d, task=%s\n", taskIndex, task)
+	fmt.Printf("Start task, taskIndex=%d, task=%v\n", taskIndex, task)
 	time.Sleep(5 * time.Second)
 
 	rdb := connector.GetNodeConn(task.NodeId)
@@ -182,7 +182,7 @@ func doTask(taskIndex int, task Task, taskChan chan *SubDelTask) {
 	for {
 		var keys []string
 		var err error
-		keys, cursor, err = rdb.Conn.Scan(ctx, cursor, task.Pattern, 300).Result()
+		keys, cursor, err = rdb.Conn.Scan(ctx, cursor, task.Pattern, 10000).Result()
 		if err != nil {
 			panic(err)
 		}
